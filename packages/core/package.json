@@ -32,7 +32,7 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
-    "@jsonlee/tsconfig": "workspace:^",
+    "@jsonlee/tsconfig": "^",
     "oxlint": "^1.8.0",
     "rolldown": "1.0.0-beta.29",
     "rolldown-plugin-dts": "^0.14.1",

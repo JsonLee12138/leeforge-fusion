@@ -34,7 +34,6 @@
     "prettier": "^3.2.5",
     "turbo": "^2.5.5"
   },
-  "packageManager": "pnpm@8.15.6",
   "engines": {
     "node": ">=18"
   },
@@ -43,5 +42,10 @@
     "commitizen": {
       "path": "node_modules/cz-git"
     }
-  }
+  },
+  "packageManager": "bun@1.1.34",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ]
 }

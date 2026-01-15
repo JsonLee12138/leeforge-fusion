@@ -1,5 +1,5 @@
 {
-  "extends": "@jsonlee/tsconfig/base.tsconfig.json",
+  "extends": "@leeforge/tsconfig/base.tsconfig.json",
   "include": [
     "./lib/**/*",
     "./__test__/**/*"

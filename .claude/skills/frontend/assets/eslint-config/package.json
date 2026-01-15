@@ -1,0 +1,39 @@
+{
+  "name": "@your-scope/eslint-config",
+  "version": "1.0.0",
+  "description": "Shared ESLint configuration for workspace projects",
+  "type": "module",
+  "main": "./dist/cjs/index.cjs",
+  "module": "./dist/es/index.mjs",
+  "exports": {
+    ".": "./dist/cjs/index.cjs",
+    "./es": "./dist/es/index.mjs",
+    "./cjs": "./dist/cjs/index.cjs",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsdown",
+    "dev": "tsdown --watch"
+  },
+  "keywords": [
+    "eslint",
+    "config",
+    "workspace",
+    "monorepo",
+    "typescript"
+  ],
+  "dependencies": {
+    "@antfu/eslint-config": "^6.0.0",
+    "eslint-plugin-format": "^1.0.2"
+  },
+  "devDependencies": {
+    "eslint": "^9.37.0",
+    "tsdown": "^0.15.9"
+  },
+  "peerDependencies": {
+    "eslint": "^9.0.0"
+  }
+}

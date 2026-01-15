@@ -1,0 +1,65 @@
+{
+  "name": "@leeforge/cli",
+  "version": "0.1.0-beta.1",
+  "description": "CLI tool for Leeforge Fusion framework",
+  "type": "module",
+  "keywords": [
+    "leeforge",
+    "cli",
+    "scaffold",
+    "generator",
+    "fullstack",
+    "framework"
+  ],
+  "author": "YeonGyu Kim <code-yeongyu>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/code-yeongyu/leeforge.git",
+    "directory": "packages/cli"
+  },
+  "bugs": {
+    "url": "https://github.com/code-yeongyu/leeforge/issues"
+  },
+  "homepage": "https://github.com/code-yeongyu/leeforge#readme",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "bin": {
+    "leeforge": "./dist/index.js"
+  },
+  "files": [
+    "dist/",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsup src/index.ts --format esm --clean --no-dts",
+    "dev": "tsup src/index.ts --format esm --watch",
+    "test": "vitest",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "commander": "^12.1.0",
+    "inquirer": "^12.0.0",
+    "ora": "^8.1.1",
+    "chalk": "^5.3.0",
+    "fs-extra": "^11.2.0",
+    "glob": "^11.1.0",
+    "minimatch": "^10.1.1"
+  },
+  "devDependencies": {
+    "@types/inquirer": "^9.0.7",
+    "@types/fs-extra": "^11.0.4",
+    "@types/node": "^24.10.2",
+    "tsup": "^8.3.5",
+    "typescript": "^5.6.2",
+    "vitest": "^2.1.9"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  }
+}

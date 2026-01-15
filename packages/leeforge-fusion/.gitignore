@@ -7,10 +7,37 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
+# Dependencies
 node_modules
+pnpm-lock.yaml
+package-lock.json
+yarn.lock
+
+# Build output
 dist
 dist-ssr
-*.local
+dist-client
+dist-server
+*.tsbuildinfo
+.leeforge-cache
+.leeforge-manifest.json
+
+# Testing
+coverage
+.nyc_output
+*.lcov
+test-results
+playwright-report
+blob-report
+tests/e2e/playwright/.cache/
+
+# Environment
+.env
+.env.local
+.env.development
+.env.staging
+.env.production
+.env.test
 
 # Editor directories and files
 .vscode/*
@@ -22,3 +49,409 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Cache
+.cache
+*.cache
+.vite
+.parcel-cache
+
+# Temporary files
+*.tmp
+*.temp
+tmp/
+temp/
+
+# OS generated files
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Optional npm cache
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# Optional REPL history
+.node_repl_history
+
+# Output of 'npm pack'
+*.tgz
+
+# Yarn Integrity file
+.yarn-integrity
+
+# parcel-bundler cache
+.cache
+.parcel-cache
+
+# Next.js build output
+.next
+
+# Nuxt.js build / generate output
+.nuxt
+
+# Gatsby files
+.cache/
+public
+
+# Storybook build outputs
+.out
+.storybook-out
+
+# Framework specific
+.leeforge/
+.leeforge-fusion-cache/
+
+# Documentation build
+docs/.vitepress/
+docs/dist/
+docs/cache/
+
+# CLI cache
+.cli-cache/
+.scaffolding/
+
+# Examples node_modules
+examples/**/node_modules/
+examples/**/dist/
+examples/**/.output/
+
+# Turborepo
+.turbo/
+
+# Secrets
+*.key
+*.pem
+*.crt
+*.cert
+secrets/
+secrets.json
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+
+# Migration files
+*.migration.sql
+*.backup
+
+# Styleguidist
+.styleguide/
+
+# Storybook
+storybook-static/
+
+# VS Code history
+.history/
+
+# Local development
+.local/
+.dev/
+.development/
+
+# Logs
+logs/
+*.log
+*.log.*
+
+# Runtime
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# Coverage
+coverage/
+.nyc_output/
+*.lcov
+
+# TypeScript
+tsconfig.tsbuildinfo
+
+# Vite
+.vite/
+*.vite-cache/
+
+# Playwright
+playwright/.cache/
+test-results/
+playwright-report/
+blob-report/
+
+# Package manager
+.pnpm-debug.log*
+.pnpm-store/
+
+# ESLint
+.eslintcache
+
+# Styleguidist
+.styleguide/
+
+# Storybook
+storybook-static/
+
+# VS Code history
+.history/
+
+# Local development
+.local/
+.dev/
+.development/
+
+# Secrets
+*.key
+*.pem
+*.crt
+*.cert
+secrets/
+secrets.json
+
+# Temporary migration files
+*.migration.sql
+*.backup
+
+# Database files (if any)
+*.db
+*.sqlite
+*.sqlite3
+
+# Cache directories
+.cache/
+*.cache/
+
+# Logs
+logs/
+*.log
+
+# Runtime
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# Coverage
+coverage/
+.nyc_output/
+*.lcov
+
+# Dependency directories
+node_modules/
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# Optional REPL history
+.node_repl_history
+
+# Output of 'npm pack'
+*.tgz
+
+# Yarn Integrity file
+.yarn-integrity
+
+# dotenv environment variables file
+.env
+.env.test
+.env.production
+
+# parcel-bundler cache (https://parceljs.org/)
+.cache
+.parcel-cache
+
+# Next.js build output
+.next
+
+# Nuxt.js build / generate output
+.nuxt
+
+# Gatsby files
+.cache/
+public
+
+# Storybook build outputs
+.out
+.storybook-out
+
+# Temporary folders
+tmp/
+temp/
+
+# Editor directories and files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# TypeScript
+*.tsbuildinfo
+
+# Vite
+.vite/
+*.vite-cache/
+
+# Playwright
+tests/e2e/test-results/
+tests/e2e/playwright/.cache/
+tests/e2e/playwright/report/
+tests/e2e/playwright/screenshots/
+
+# Framework specific
+dist/
+dist-client/
+dist-server/
+.leeforge-cache/
+.leeforge-manifest.json
+
+# Documentation build (if any)
+docs/.vitepress/dist/
+docs/.vitepress/cache/
+
+# CLI cache
+.cli-cache/
+.scaffolding/
+
+# Example app dependencies (if copied)
+examples/*/node_modules/
+examples/*/dist/
+examples/*/build/
+
+# Lock files (in packages)
+*.lock
+*.lock.*
+
+# pnpm workspace
+.pnpm-store/
+
+# Turborepo
+.turbo/
+
+# Environment
+.env.local
+.env.development
+.env.staging
+.env.production
+
+# IDE
+.vscode/
+.idea/
+*.code-workspace
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+*.log.*
+
+# Temp files
+*.tmp
+*.temp
+
+# Cache
+.cache/
+*.cache
+
+# Build artifacts
+*.js.map
+*.d.ts.map
+*.mjs.map
+
+# Test artifacts
+test-results/
+playwright-report/
+blob-report/
+playwright/.cache/
+
+# Coverage
+coverage/
+.nyc_output/
+*.lcov
+
+# Documentation
+docs/.vitepress/
+docs/dist/
+docs/cache/
+
+# Examples (node_modules)
+examples/**/node_modules/
+examples/**/dist/
+examples/**/.output/
+
+# Framework cache
+.leeforge/
+.leeforge-fusion-cache/
+
+# Package manager
+.pnpm-debug.log*
+.pnpm-store/
+
+# TypeScript
+tsconfig.tsbuildinfo
+
+# Vite
+.vite/
+*.vite-cache/
+
+# Playwright
+playwright/.cache/
+test-results/
+playwright-report/
+blob-report/
+
+# Turborepo
+.turbo/
+
+# ESLint
+.eslintcache
+
+# Styleguidist
+.styleguide/
+
+# Storybook
+storybook-static/
+
+# VS Code history
+.history/
+
+# Local development
+.local/
+.dev/
+.development/
+
+# Secrets
+*.key
+*.pem
+*.crt
+*.cert
+secrets/
+secrets.json
+
+# Temporary migration files
+*.migration.sql
+*.backup
+
+# Database files (if any)
+*.db
+*.sqlite
+*.sqlite3

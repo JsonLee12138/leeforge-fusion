@@ -1,6 +1,6 @@
 {
   "name": "@leeforge/fusion-cli",
-  "version": "0.1.0-beta.1",
+  "version": "0.1.0",
   "description": "CLI tool for Leeforge Fusion framework",
   "type": "module",
   "keywords": [
@@ -11,17 +11,17 @@
     "fullstack",
     "framework"
   ],
-  "author": "YeonGyu Kim <code-yeongyu>",
+  "author": "",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/code-yeongyu/leeforge.git",
+    "url": "https://github.com/JsonLee12138/leeforge-fusion.git",
     "directory": "packages/cli"
   },
   "bugs": {
-    "url": "https://github.com/code-yeongyu/leeforge/issues"
+    "url": "https://github.com/JsonLee12138/leeforge-fusion/issues"
   },
-  "homepage": "https://github.com/code-yeongyu/leeforge#readme",
+  "homepage": "https://github.com/JsonLee12138/leeforge-fusion#readme",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
   "bin": {

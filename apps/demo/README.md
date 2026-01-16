@@ -205,7 +205,7 @@ curl http://localhost:3000/api/posts
 
 - [Framework Documentation](/docs)
 - [API Reference](/docs/README.md)
-- [GitHub Repository](https://github.com/code-yeongyu/leeforge)
+- [GitHub Repository](https://github.com/JsonLee12138/leeforge-fusion)
 
 ---
 

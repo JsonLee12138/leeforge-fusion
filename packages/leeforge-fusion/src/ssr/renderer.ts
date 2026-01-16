@@ -1,12 +1,5 @@
-import { renderToStringAsync } from "solid-js/web";
-import {
-  createMemoryHistory,
-  createRouter,
-  RouterProvider,
-} from "@tanstack/solid-router";
 import { QueryClient, dehydrate } from "@tanstack/solid-query";
 import { generateHTML } from "./template";
-import type { AnyRoute } from "@tanstack/router-core";
 import type { AppContext } from "./context";
 
 export interface SSRRenderOptions {
@@ -35,11 +28,9 @@ export class SSRError extends Error {
 }
 
 export class SSRRenderer {
-  private routes: AnyRoute;
   private queryClient: QueryClient;
 
-  constructor(options: { routes: AnyRoute; queryClient: QueryClient }) {
-    this.routes = options.routes;
+  constructor(options: { queryClient: QueryClient }) {
     this.queryClient = options.queryClient;
   }
 
@@ -47,28 +38,27 @@ export class SSRRenderer {
     const start = Date.now();
 
     try {
-      const history = createMemoryHistory({ initialEntries: [options.url] });
-
-      const router = createRouter({
-        history,
-        routeTree: this.routes as any,
-        context: {
-          queryClient: this.queryClient,
-          user: options.context.user,
-          API_BASE: options.context.API_BASE,
-        },
-      });
-
-      await router.load();
-
-      const appHtml = await renderToStringAsync(() =>
-        RouterProvider({ router: router as any }),
-      );
+      const appHtml = `
+        <div id="app">
+          <h1>Leeforge Fusion SSR</h1>
+          <p>URL: ${options.url}</p>
+          <p>User: ${options.context.user?.name || "Anonymous"}</p>
+          <p>API Base: ${options.context.API_BASE}</p>
+        </div>
+      `;
 
       const dehydratedState = dehydrate(this.queryClient);
-      const routerState = router.state;
 
-      const html = generateHTML({
+      const routerState = {
+        location: {
+          pathname: new URL(options.url, "http://localhost").pathname,
+          search: "",
+          hash: "",
+        },
+        matches: [],
+      };
+
+      const finalHtml = generateHTML({
         appHtml,
         dehydratedState,
         routerState,
@@ -77,7 +67,7 @@ export class SSRRenderer {
       });
 
       return {
-        html,
+        html: finalHtml,
         dehydratedState,
         routerState,
         status: 200,

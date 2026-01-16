@@ -204,8 +204,8 @@ We welcome contributions to translate documentation into more languages!
 
 ## 📞 Support
 
-- **GitHub Issues**: https://github.com/code-yeongyu/leeforge/issues
-- **Discussions**: https://github.com/code-yeongyu/leeforge/discussions
+- **GitHub Issues**: https://github.com/JsonLee12138/leeforge-fusion/issues
+- **Discussions**: https://github.com/JsonLee12138/leeforge-fusion/discussions
 
 ---
 

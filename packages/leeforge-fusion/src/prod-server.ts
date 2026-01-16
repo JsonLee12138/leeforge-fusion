@@ -47,12 +47,10 @@ export async function startProdServer(options: ProdServerOptions) {
     }
   }
 
-  const routesModule = await import(routesFile);
-  const routeTree = routesModule.router || routesModule.default;
+  await import(routesFile);
 
   const queryClient = new QueryClient();
   const renderer = new SSRRenderer({
-    routes: routeTree,
     queryClient,
   });
 

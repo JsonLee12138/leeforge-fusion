@@ -1,6 +1,6 @@
 {
   "name": "@leeforge/fusion",
-  "version": "0.1.0-beta.1",
+  "version": "0.1.0",
   "description": "A full-stack SSR framework with file-based routing, middleware, and server actions",
   "type": "module",
   "keywords": [
@@ -14,17 +14,17 @@
     "hono",
     "tanstack-router"
   ],
-  "author": "YeonGyu Kim <code-yeongyu>",
+  "author": "",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/code-yeongyu/leeforge.git",
+    "url": "https://github.com/JsonLee12138/leeforge-fusion.git",
     "directory": "packages/leeforge-fusion"
   },
   "bugs": {
-    "url": "https://github.com/code-yeongyu/leeforge/issues"
+    "url": "https://github.com/JsonLee12138/leeforge-fusion/issues"
   },
-  "homepage": "https://github.com/code-yeongyu/leeforge#readme",
+  "homepage": "https://github.com/JsonLee12138/leeforge-fusion#readme",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -39,8 +39,6 @@
   "files": [
     "dist/",
     "src/",
-    "docs/",
-    "examples/",
     "README.md",
     "LICENSE"
   ],
@@ -48,6 +46,7 @@
     "build": "tsup src/index.ts --format esm --dts --clean",
     "dev": "tsup src/index.ts --format esm --watch",
     "test": "vitest",
+    "test:e2e": "cd tests/e2e && playwright test",
     "typecheck": "tsc --noEmit",
     "prepublishOnly": "npm run build && npm test"
   },

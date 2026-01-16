@@ -4,9 +4,9 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "leeforge dev",
-    "build": "leeforge build",
-    "preview": "leeforge preview",
+    "dev": "lf-fusion dev",
+    "build": "lf-fusion build",
+    "preview": "lf-fusion preview",
     "test": "vitest"
   },
   "dependencies": {

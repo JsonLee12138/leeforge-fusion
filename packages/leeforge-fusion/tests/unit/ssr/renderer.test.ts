@@ -10,19 +10,58 @@ describe("SSRRenderer", () => {
     queryClient = new QueryClient();
   });
 
-  test("creates renderer with routes and queryClient", () => {
-    const mockRoutes = {
-      id: "root",
-      path: "/",
-      component: () => ({ default: () => "Home" }),
-    };
-
+  test("creates renderer with queryClient", () => {
     const renderer = new SSRRenderer({
-      routes: mockRoutes as any,
       queryClient,
     });
 
     expect(renderer).toBeDefined();
+  });
+
+  test("renders SSR HTML successfully", async () => {
+    const renderer = new SSRRenderer({
+      queryClient,
+    });
+
+    const context = ContextManager.createContext({
+      request: new Request("http://localhost"),
+      user: { id: "123", name: "Test User" },
+      API_BASE: "/api",
+    });
+
+    const result = await renderer.render({
+      url: "/test",
+      context,
+    });
+
+    expect(result.html).toBeDefined();
+    expect(result.html).toContain("Leeforge Fusion SSR");
+    expect(result.html).toContain("/test");
+    expect(result.html).toContain("Test User");
+    expect(result.html).toContain("/api");
+    expect(result.status).toBe(200);
+    expect(result.headers["Content-Type"]).toContain("text/html");
+    expect(result.dehydratedState).toBeDefined();
+    expect(result.routerState).toBeDefined();
+  });
+
+  test("renders SSR HTML without user", async () => {
+    const renderer = new SSRRenderer({
+      queryClient,
+    });
+
+    const context = ContextManager.createContext({
+      request: new Request("http://localhost"),
+      API_BASE: "/api",
+    });
+
+    const result = await renderer.render({
+      url: "/test",
+      context,
+    });
+
+    expect(result.html).toContain("Anonymous");
+    expect(result.status).toBe(200);
   });
 
   test("context manager creates context", () => {

@@ -11,10 +11,8 @@ export type GuardFunction = (context: LoaderContext) => Promise<void> | void;
 
 export function defineGuard(guard: GuardFunction): GuardFunction {
   return async (context: LoaderContext) => {
-    const result = guard(context);
-    if (result instanceof Promise) {
-      await result;
-    }
+    await guard(context);
+    return Promise.resolve();
   };
 }
 

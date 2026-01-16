@@ -14,7 +14,7 @@ hero:
       link: /zh/examples
     - theme: alt
       text: GitHub
-      link: https://github.com/code-yeongyu/leeforge
+      link: https://github.com/JsonLee12138/leeforge-fusion
 
 features:
   - title: 🚀 文件路由
@@ -852,13 +852,13 @@ npm install @leeforge/fusion @leeforge/fusion-cli solid-js @tanstack/solid-route
 
 ## 📞 支持
 
-- **GitHub Issues**: https://github.com/code-yeongyu/leeforge/issues
-- **讨论区**: https://github.com/code-yeongyu/leeforge/discussions
-- **文档**: https://github.com/code-yeongyu/leeforge/tree/main/apps/docs
+- **GitHub Issues**: https://github.com/JsonLee12138/leeforge-fusion/issues
+- **讨论区**: https://github.com/JsonLee12138/leeforge-fusion/discussions
+- **文档**: https://github.com/JsonLee12138/leeforge-fusion/tree/main/apps/docs
 
 ## 📄 许可证
 
-MIT 许可证 - 详见 [LICENSE](https://github.com/code-yeongyu/leeforge/blob/main/LICENSE)
+MIT 许可证 - 详见 [LICENSE](https://github.com/JsonLee12138/leeforge-fusion/blob/main/LICENSE)
 
 ---
 

@@ -14,7 +14,7 @@ hero:
       link: /examples
     - theme: alt
       text: View on GitHub
-      link: https://github.com/code-yeongyu/leeforge
+      link: https://github.com/JsonLee12138/leeforge-fusion/leeforge
 
 features:
   - title: 🚀 File-Based Routing
@@ -868,13 +868,13 @@ Check your `tsconfig.json`:
 
 ## 📞 Support
 
-- **GitHub Issues**: https://github.com/code-yeongyu/leeforge/issues
-- **Discussions**: https://github.com/code-yeongyu/leeforge/discussions
-- **Documentation**: https://github.com/code-yeongyu/leeforge/tree/main/apps/docs
+- **GitHub Issues**: https://github.com/JsonLee12138/leeforge-fusion/issues
+- **Discussions**: https://github.com/JsonLee12138/leeforge-fusion/discussions
+- **Documentation**: https://github.com/JsonLee12138/leeforge-fusion/tree/main/apps/docs
 
 ## 📄 License
 
-MIT License - see [LICENSE](https://github.com/code-yeongyu/leeforge/blob/main/LICENSE) for details.
+MIT License - see [LICENSE](https://github.com/JsonLee12138/leeforge-fusion/blob/main/LICENSE) for details.
 
 ---
 

@@ -1,4 +1,4 @@
-# Leeforge Fusion Skill Rules
+# Leeforge Fusion Rules
 
 ## When to Use This Skill
 

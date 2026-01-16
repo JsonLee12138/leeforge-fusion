@@ -101,7 +101,7 @@ packages/leeforge-fusion/
 │       └── ... (配置文件)
 ├── package.json
 ├── vite.config.ts
-└── framework.config.ts
+└── leeforge.config.ts
 ```
 
 ---

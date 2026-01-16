@@ -1,0 +1,53 @@
+{
+  "default": "en",
+  "supported": [
+    {
+      "code": "en",
+      "name": "English",
+      "nativeName": "English",
+      "flag": "🇺🇸"
+    },
+    {
+      "code": "zh",
+      "name": "Chinese",
+      "nativeName": "中文",
+      "flag": "🇨🇳"
+    }
+  ],
+  "routes": {
+    "en": {
+      "index": "/en/",
+      "quick-start": "/en/quick-start",
+      "core-concepts": "/en/core-concepts",
+      "cli": "/en/cli",
+      "api": "/en/api",
+      "examples": "/en/examples"
+    },
+    "zh": {
+      "index": "/zh/",
+      "quick-start": "/zh/quick-start",
+      "core-concepts": "/zh/core-concepts",
+      "cli": "/zh/cli",
+      "api": "/zh/api",
+      "examples": "/zh/examples"
+    }
+  },
+  "navigation": {
+    "en": {
+      "home": "Home",
+      "quick-start": "Quick Start",
+      "core-concepts": "Core Concepts",
+      "cli": "CLI Reference",
+      "api": "API Reference",
+      "examples": "Examples"
+    },
+    "zh": {
+      "home": "首页",
+      "quick-start": "快速开始",
+      "core-concepts": "核心概念",
+      "cli": "CLI 参考",
+      "api": "API 参考",
+      "examples": "示例"
+    }
+  }
+}

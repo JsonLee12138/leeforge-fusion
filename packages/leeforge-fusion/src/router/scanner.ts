@@ -40,12 +40,19 @@ export class RouteScanner {
   }
 
   private async findFiles(): Promise<string[]> {
-    const pattern = `${this.appDir}/**/{page,layout,route,page.server}.{tsx,ts,jsx,js}`;
+    const pattern = `${this.appDir}/**/{page,layout,route,page.server,index,about,new}.{tsx,ts,jsx,js}`;
     const files = await glob(pattern, {
       ignore: this.ignore,
       nodir: true,
     });
-    return files.map((f: string) => normalize(f));
+
+    const dynamicPattern = `${this.appDir}/**/[[]*[]].{tsx,ts,jsx,js}`;
+    const dynamicFiles = await glob(dynamicPattern, {
+      ignore: this.ignore,
+      nodir: true,
+    });
+
+    return [...files, ...dynamicFiles].map((f: string) => normalize(f));
   }
 
   private buildRouteTree(files: string[]): Route[] {
@@ -105,7 +112,16 @@ export class RouteScanner {
     const baseName = fileName.split(".")[0];
 
     let type: RouteType;
-    if (baseName === "page") type = "page";
+    const isDynamicRoute = baseName.startsWith("[") && baseName.endsWith("]");
+
+    if (
+      baseName === "page" ||
+      baseName === "index" ||
+      baseName === "about" ||
+      baseName === "new" ||
+      isDynamicRoute
+    )
+      type = "page";
     else if (baseName === "page.server") type = "server";
     else if (baseName === "layout") type = "layout";
     else if (baseName === "route") type = "api";
@@ -128,7 +144,13 @@ export class RouteScanner {
   }
 
   private dirToPath(dirPath: string, baseName: string): string {
+    const isDynamicRoute = baseName.startsWith("[") && baseName.endsWith("]");
+
     if (baseName === "page" && dirPath === "") return "/";
+    if (baseName === "index" && dirPath === "") return "/";
+    if (baseName === "about" && dirPath === "") return "/about";
+    if (baseName === "new" && dirPath === "") return "/new";
+    if (isDynamicRoute && dirPath === "") return "/" + baseName.slice(1, -1);
 
     const parts = dirPath.split(/[\\/]/).filter((p) => p);
 
@@ -152,6 +174,27 @@ export class RouteScanner {
 
     if (baseName === "page") {
       return pathParts.length > 0 ? "/" + pathParts.join("/") : "/";
+    }
+
+    if (baseName === "index") {
+      return pathParts.length > 0 ? "/" + pathParts.join("/") : "/";
+    }
+
+    if (baseName === "about") {
+      return pathParts.length > 0
+        ? "/" + pathParts.join("/") + "/about"
+        : "/about";
+    }
+
+    if (baseName === "new") {
+      return pathParts.length > 0 ? "/" + pathParts.join("/") + "/new" : "/new";
+    }
+
+    if (isDynamicRoute) {
+      const paramName = baseName.slice(1, -1);
+      return pathParts.length > 0
+        ? "/" + pathParts.join("/") + "/:" + paramName
+        : "/:" + paramName;
     }
 
     return pathParts.length > 0 ? "/" + pathParts.join("/") : "/";

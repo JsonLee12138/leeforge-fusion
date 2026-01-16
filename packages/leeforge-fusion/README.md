@@ -221,16 +221,15 @@ examples/blog/
 
 ## 🔧 Configuration
 
-### framework.config.ts
+### leeforge.config.ts
 
 ```typescript
-import { defineConfig } from "leeforge-fusion/config";
-import { requireAuth } from "leeforge-fusion/middleware";
+import { defineConfig } from "leeforge-fusion";
 
 export default defineConfig({
   // Route guards
   guards: {
-    "/admin/*": [requireAuth()],
+    "/admin/*": "./src/middleware/auth.ts",
   },
 
   // API configuration
@@ -244,18 +243,18 @@ export default defineConfig({
     render: "stream", // or "static"
     timeout: 10000,
   },
-});
-```
 
-### vite.config.ts
-
-```typescript
-import { defineConfig } from "vite";
-import solid from "vite-plugin-solid";
-import { leeforgePlugin } from "leeforge-fusion/vite-plugin";
-
-export default defineConfig({
-  plugins: [solid(), leeforgePlugin()],
+  // Vite configuration (merged with framework defaults)
+  vite: {
+    server: {
+      port: 3000,
+      host: "localhost",
+    },
+    build: {
+      outDir: "dist",
+      sourcemap: true,
+    },
+  },
 });
 ```
 

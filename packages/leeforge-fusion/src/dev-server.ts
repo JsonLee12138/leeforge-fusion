@@ -2,6 +2,8 @@ import { createServer } from "vite";
 import { join } from "path";
 import { createServer as createHttpServer } from "http";
 import { existsSync } from "fs";
+import { loadConfig, extractViteConfig } from "./config/loader";
+import { RouteScanner } from "./router/scanner";
 
 export interface DevServerOptions {
   port: number;
@@ -14,42 +16,65 @@ export async function startDevServer(options: DevServerOptions) {
   const rootDir = options.rootDir || process.cwd();
   const appDir = join(rootDir, options.appDir);
 
+  const config = await loadConfig(rootDir);
+  const viteConfig = extractViteConfig(config);
+
   const vite = await createServer({
     root: rootDir,
     server: { middlewareMode: true },
     appType: "custom",
+    ...viteConfig,
   });
 
   const port = await findAvailablePort(options.port);
+
+  const scanner = new RouteScanner({
+    appDir,
+    ignore: ["**/node_modules/**", "**/.git/**"],
+    cache: false,
+  });
+
+  const scanResult = await scanner.scan();
+  const routes = scanResult.routes;
+
+  const routePaths: string[] = [];
+  const buildRoutePaths = (routeList: any[]) => {
+    for (const route of routeList) {
+      if (route.type === "page") {
+        routePaths.push(route.path);
+      }
+      if (route.children) {
+        buildRoutePaths(route.children);
+      }
+    }
+  };
+  buildRoutePaths(routes);
+
+  const layoutPath = join(appDir, "layout.tsx");
+  const layoutExists = existsSync(layoutPath);
 
   const server = createHttpServer(async (req, res) => {
     const url = req.url || "/";
     const path = url.split("?")[0];
 
-    const routes = [
-      "/",
-      "/about",
-      "/blog",
-      "/blog/new",
-      "/dashboard",
-      "/admin",
-    ];
+    let isValidRoute = routePaths.includes(path);
 
-    let isValidRoute = routes.includes(path);
-
-    if (!isValidRoute && path.startsWith("/blog/") && path !== "/blog/new") {
-      const parts = path.split("/");
-      isValidRoute =
-        parts.length === 3 &&
-        parts[0] === "" &&
-        parts[1] === "blog" &&
-        /^\d+$/.test(parts[2]);
+    if (!isValidRoute) {
+      for (const routePath of routePaths) {
+        if (routePath.includes(":")) {
+          const regexPattern = routePath
+            .replace(/:[^/]+/g, "[^/]+")
+            .replace(/\//g, "\\/");
+          const regex = new RegExp(`^${regexPattern}$`);
+          if (regex.test(path)) {
+            isValidRoute = true;
+            break;
+          }
+        }
+      }
     }
 
     if (isValidRoute) {
-      const layoutPath = join(appDir, "layout.tsx");
-      const layoutExists = existsSync(layoutPath);
-
       let pageContent = "";
       let pageTitle = "Leeforge Fusion";
 
@@ -78,6 +103,9 @@ export async function startDevServer(options: DevServerOptions) {
         const id = path.split("/")[2];
         pageTitle = `Blog Post ${id}`;
         pageContent = `<h1>Blog Post ${id}</h1><p>Content for post ${id}</p>`;
+      } else {
+        pageTitle = path;
+        pageContent = `<h1>${path}</h1><p>This is a dynamically generated page.</p>`;
       }
 
       const html = generateHTML({
@@ -86,6 +114,7 @@ export async function startDevServer(options: DevServerOptions) {
         layoutExists,
         content: pageContent,
         status: "200",
+        routePaths,
       });
 
       res.writeHead(200, { "Content-Type": "text/html" });
@@ -98,6 +127,7 @@ export async function startDevServer(options: DevServerOptions) {
         content: `<h1>404 - Page Not Found</h1><p>The page <strong>${path}</strong> does not exist.</p><p><a href="/">Go back home</a></p>`,
         status: "404",
         isError: true,
+        routePaths,
       });
 
       res.writeHead(404, { "Content-Type": "text/html" });
@@ -109,7 +139,7 @@ export async function startDevServer(options: DevServerOptions) {
     console.log(`🚀 Leeforge Dev Server running on http://localhost:${port}`);
     console.log(`📁 Serving from: ${appDir}`);
     console.log(
-      `🔗 Routes: /, /about, /blog, /blog/new, /blog/:id, /dashboard, /admin`,
+      `🔗 Routes: ${routePaths.length > 0 ? routePaths.join(", ") : "No routes found"}`,
     );
     console.log(`⚠️  404: Any other route will show error page`);
   });
@@ -148,9 +178,28 @@ function generateHTML(options: {
   content: string;
   status: string;
   isError?: boolean;
+  routePaths?: string[];
 }) {
   const statusColor = options.isError ? "#dc2626" : "#2563eb";
   const statusBg = options.isError ? "#fee2e2" : "#dbeafe";
+
+  const navLinks = options.routePaths
+    ? options.routePaths
+        .filter((route) => !route.includes(":"))
+        .map((route) => {
+          let label;
+          if (route === "/") {
+            label = "Home";
+          } else if (route === "/blog/new") {
+            label = "New Post";
+          } else {
+            label = route.slice(1).replace(/\/.*/g, "").replace(/-/g, " ");
+            label = label.charAt(0).toUpperCase() + label.slice(1);
+          }
+          return `<a href="${route}">${label}</a>`;
+        })
+        .join("")
+    : "";
 
   return `
     <!DOCTYPE html>
@@ -178,13 +227,8 @@ function generateHTML(options: {
         <div class="container">
           <header>
             <nav>
-              <a href="/" class="logo"><strong>Demo App</strong></a>
-              <a href="/">Home</a>
-              <a href="/about">About</a>
-              <a href="/blog">Blog</a>
-              <a href="/blog/new">New Post</a>
-              <a href="/dashboard">Dashboard</a>
-              <a href="/admin">Admin</a>
+              <a href="/" class="logo"><strong>Leeforge</strong></a>
+              ${navLinks}
             </nav>
           </header>
           <main>
@@ -203,7 +247,7 @@ function generateHTML(options: {
             </div>
           </main>
           <footer>
-            © 2026 Leeforge Fusion Demo App
+            © 2026 Leeforge Fusion
           </footer>
         </div>
       </body>

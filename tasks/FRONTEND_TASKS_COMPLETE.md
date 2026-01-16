@@ -903,7 +903,7 @@ leeforge generate component Card
 
 ### CLI 工具
 
-- ✅ `@leeforge/cli` - CLI 包
+- ✅ `@leeforge/fusion-cli` - CLI 包
 - ✅ `src/index.ts` - CLI 入口
 - ✅ `src/commands/dev.ts` - Dev 命令
 - ✅ `src/commands/build.ts` - Build 命令

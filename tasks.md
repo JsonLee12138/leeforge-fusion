@@ -563,7 +563,7 @@ examples/blog/
 │   └── lib/
 │       └── db.ts
 ├── package.json
-└── framework.config.ts
+└── leeforge.config.ts
 ```
 
 ---

@@ -35,15 +35,15 @@ my-app/
 │   └── api/                # API 路由
 │       └── posts/
 │           └── route.ts
-├── framework.config.ts     # 配置文件
+├── leeforge.config.ts     # 配置文件
 ├── package.json
-└── vite.config.ts
+└── tsconfig.json
 ```
 
 ### 3. 配置文件
 
 ```typescript
-// framework.config.ts
+// leeforge.config.ts
 import { defineConfig } from "@leeforge/fusion";
 
 export default defineConfig({
@@ -55,10 +55,8 @@ export default defineConfig({
       "(admin)": "/admin",
     },
     guards: {
-      "/admin/*": "./middleware/auth.ts",
-      "/dashboard/*": "./middleware/auth.ts",
+      "/admin/*": "./src/middleware/auth.ts",
     },
-    ignore: ["**/*.spec.ts", "**/test/**"],
   },
 });
 ```
@@ -492,7 +490,7 @@ DEBUG=leeforge:* leeforge dev
 1. 检查文件命名是否正确
 2. 确认文件在 `app/` 目录
 3. 运行 `npm run generate` 查看路由清单
-4. 检查 `framework.config.ts` 中的 ignore 配置
+4. 检查 `leeforge.config.ts` 中的 ignore 配置
 
 #### 守卫不生效
 
@@ -534,10 +532,20 @@ DEBUG=leeforge:* leeforge dev
 ### 1. 路由缓存
 
 ```typescript
-// framework.config.ts
+// leeforge.config.ts
+import { defineConfig } from "@leeforge/fusion";
+
 export default defineConfig({
   routes: {
-    cache: true, // 启用路由缓存
+    base: "/",
+    trailingSlash: "never",
+    groups: {
+      "(dashboard)": "/dashboard",
+      "(admin)": "/admin",
+    },
+    guards: {
+      "/admin/*": "./middleware/auth.ts",
+    },
   },
 });
 ```

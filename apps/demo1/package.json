@@ -1,0 +1,17 @@
+{
+  "name": "my-app",
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "leeforge dev",
+    "build": "leeforge build",
+    "preview": "leeforge preview"
+  },
+  "dependencies": {
+    "@leeforge/fusion": "^0.1.0-beta.1",
+    "@leeforge/fusion-cli": "^0.1.0-beta.1",
+    "solid-js": "^1.9.10",
+    "@tanstack/solid-router": "^1.150.0",
+    "@tanstack/solid-query": "^5.90.20"
+  }
+}

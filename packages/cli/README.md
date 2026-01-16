@@ -5,16 +5,34 @@ Command-line interface for Leeforge Fusion framework.
 ## Installation
 
 ```bash
-npm install -g @leeforge/cli
+npm install -g @leeforge/fusion-cli
 ```
 
 Or use with npx:
 
 ```bash
-npx @leeforge/cli <command>
+npx @leeforge/fusion-cli <command>
 ```
 
 ## Commands
+
+### `init`
+
+Initialize a new Leeforge Fusion project.
+
+```bash
+# Create a new project with the basic template
+leeforge init my-app
+
+# Create a project with a specific template
+leeforge init my-blog --template blog
+leeforge init my-dashboard --template dashboard
+
+# Available templates:
+# - basic: Simple app with home and about pages
+# - blog: Blog with posts, categories, and RSS
+# - dashboard: Admin dashboard with authentication
+```
 
 ### `dev`
 
@@ -115,18 +133,22 @@ src/
 
 ## Configuration
 
-Create `framework.config.ts` in your project root:
+Create `leeforge.config.ts` in your project root:
 
 ```typescript
-import { defineConfig } from "@leeforge/fusion/config";
-import { requireAuth } from "@leeforge/fusion/middleware";
+import { defineConfig } from "@leeforge/fusion";
 
 export default defineConfig({
   guards: {
-    "/admin/*": [requireAuth()],
+    "/admin/*": "./src/middleware/auth.ts",
   },
   api: {
     prefix: "/api",
+  },
+  vite: {
+    server: {
+      port: 3000,
+    },
   },
 });
 ```

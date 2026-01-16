@@ -121,7 +121,7 @@ my-app/
 ├── config/
 │   ├── vite.config.ts          # Vite 配置
 │   ├── tsconfig.json           # TypeScript 配置
-│   └── framework.config.ts     # 框架配置
+│   └── leeforge.config.ts      # 框架配置
 ├── package.json
 └── bun.lockb
 ```
@@ -1871,7 +1871,7 @@ export default async function Page() {
 #### 配置文件
 
 ```typescript
-// framework.config.ts
+// leeforge.config.ts
 import { defineConfig } from "your-framework";
 
 export default defineConfig({
@@ -1886,8 +1886,15 @@ export default defineConfig({
     },
   },
 
-  // 构建配置
-  build: {
+  // Vite 配置
+  vite: {
+    server: {
+      port: 3000,
+    },
+  },
+});
+```
+
     outDir: "dist",
     sourcemap: true,
     minify: true,
@@ -1901,36 +1908,38 @@ export default defineConfig({
         },
       },
     },
-  },
 
-  // SSR 配置
-  ssr: {
-    external: [],
-    noExternal: ["solid-js", "@tanstack/*"],
-    // 预渲染
-    prerender: {
-      routes: ["/", "/about", "/contact"],
-      crawl: true,
-    },
-  },
+},
 
-  // 中间件
-  middleware: ["./app/middleware.ts", "./lib/middleware/auth.ts"],
+// SSR 配置
+ssr: {
+external: [],
+noExternal: ["solid-js", "@tanstack/*"],
+// 预渲染
+prerender: {
+routes: ["/", "/about", "/contact"],
+crawl: true,
+},
+},
 
-  // API 配置
-  api: {
-    prefix: "/api",
-    timeout: 10000,
-  },
+// 中间件
+middleware: ["./app/middleware.ts", "./lib/middleware/auth.ts"],
 
-  // 开发服务器
-  devServer: {
-    port: 3000,
-    hmr: true,
-    https: false,
-  },
+// API 配置
+api: {
+prefix: "/api",
+timeout: 10000,
+},
+
+// 开发服务器
+devServer: {
+port: 3000,
+hmr: true,
+https: false,
+},
 });
-```
+
+````
 
 #### 开发工具集成
 
@@ -1963,12 +1972,12 @@ export function setupDevTools() {
     console.log("🛠️ Framework DevTools ready");
   }
 }
-```
+````
 
 #### 配置文件
 
 ```typescript
-// framework.config.ts
+// leeforge.config.ts
 import { defineConfig } from "your-framework";
 // 需要支持vite打包的所有功能
 export default defineConfig({

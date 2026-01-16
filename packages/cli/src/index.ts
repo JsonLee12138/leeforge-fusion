@@ -35,4 +35,18 @@ program
     await generateCommand(type, name, options);
   });
 
+program
+  .command("init")
+  .description("Initialize a new Leeforge Fusion project")
+  .argument("[name]", "Project name", "my-app")
+  .option(
+    "-t, --template <type>",
+    "Template to use (basic, blog, dashboard)",
+    "basic",
+  )
+  .action(async (name, options) => {
+    const { initCommand } = await import("./commands/init");
+    await initCommand(name, options);
+  });
+
 program.parse();

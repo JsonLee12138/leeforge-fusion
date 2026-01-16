@@ -1,5 +1,5 @@
 {
-  "name": "demo-app",
+  "name": "demo",
   "version": "0.1.0",
   "private": true,
   "type": "module",
@@ -10,7 +10,7 @@
     "test": "vitest"
   },
   "dependencies": {
-    "@leeforge/cli": "workspace:*",
+    "@leeforge/fusion-cli": "workspace:*",
     "@leeforge/fusion": "workspace:*",
     "solid-js": "^1.9.10",
     "@tanstack/solid-router": "^1.150.0",

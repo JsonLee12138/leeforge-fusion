@@ -223,7 +223,7 @@ app/
 ### 配置文件
 
 ```typescript
-// framework.config.ts
+// leeforge.config.ts
 import { defineConfig } from "@leeforge/fusion";
 
 export default defineConfig({
@@ -235,7 +235,7 @@ export default defineConfig({
       "(admin)": "/admin",
     },
     guards: {
-      "/admin/*": "./middleware/auth.ts",
+      "/admin/*": "./src/middleware/auth.ts",
     },
   },
 });

@@ -124,7 +124,9 @@ export async function POST(req: Request) {
 #### 框架配置
 
 ```typescript
-// framework.config.ts
+// leeforge.config.ts
+import { defineConfig } from "@leeforge/fusion";
+
 export default defineConfig({
   routes: {
     base: "/",
@@ -133,27 +135,22 @@ export default defineConfig({
     guards: { "/admin/*": "./middleware/auth.ts" },
     ignore: ["**/*.spec.ts"],
   },
+  vite: {
+    server: {
+      port: 3000,
+    },
+  },
 });
 ```
 
-#### Vite 配置
-
-```typescript
-// vite.config.ts
-import { defineConfig } from "vite";
-import solid from "vite-plugin-solid";
-import { frameworkPlugin } from "@leeforge/fusion";
-
-export default defineConfig({
-  plugins: [
-    solid({ ssr: true }),
-    frameworkPlugin({
       appDir: "./app",
       apiDir: "./app/api",
     }),
-  ],
+
+],
 });
-```
+
+````
 
 ### 🎯 最佳实践
 
@@ -201,7 +198,7 @@ npm run typecheck
 
 # 运行测试
 npm test
-```
+````
 
 ### 📊 项目状态
 

@@ -124,7 +124,7 @@
 npm install @leeforge/fusion
 
 # 2. 创建配置
-# framework.config.ts
+# leeforge.config.ts
 
 # 3. 创建页面
 # app/page.tsx

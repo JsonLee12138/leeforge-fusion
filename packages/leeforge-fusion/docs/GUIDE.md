@@ -22,14 +22,14 @@ my-app/
 │   └── api/
 │       └── posts/
 │           └── route.ts
-├── framework.config.ts
+├── leeforge.config.ts
 └── package.json
 ```
 
 ### 3. 配置
 
 ```typescript
-// framework.config.ts
+// leeforge.config.ts
 import { defineConfig } from "@leeforge/fusion";
 
 export default defineConfig({
@@ -41,7 +41,7 @@ export default defineConfig({
       "(admin)": "/admin",
     },
     guards: {
-      "/admin/*": "./middleware/auth.ts",
+      "/admin/*": "./src/middleware/auth.ts",
     },
   },
 });
@@ -296,9 +296,21 @@ generator.generateClientRouteFile = (route) => {
 ### 插件系统
 
 ```typescript
-// framework.config.ts
+// leeforge.config.ts
+import { defineConfig } from "@leeforge/fusion";
+
 export default defineConfig({
-  plugins: [myPlugin(), anotherPlugin()],
+  routes: {
+    base: "/",
+    trailingSlash: "never",
+    groups: {
+      "(dashboard)": "/dashboard",
+      "(admin)": "/admin",
+    },
+    guards: {
+      "/admin/*": "./src/middleware/auth.ts",
+    },
+  },
 });
 ```
 
